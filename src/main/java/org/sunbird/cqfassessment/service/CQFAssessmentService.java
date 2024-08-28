@@ -5,6 +5,7 @@ import org.sunbird.common.model.SBApiResponse;
 import java.util.Map;
 
 /**
+ * @author mahesh.vakkund
  * Service interface for managing CQF Assessments.
  */
 public interface CQFAssessmentService {
@@ -44,4 +45,16 @@ public interface CQFAssessmentService {
      * @return the API response containing the list of assessments
      */
     SBApiResponse listCQFAssessments(String authToken);
+
+    /**
+     * Reads an assessment from the API.
+     *
+     * @param assessmentIdentifier Unique identifier of the assessment to read.
+     * @param token                Authentication token for the API request.
+     * @param edit                 Whether the assessment should be retrieved in edit mode.
+     * @param contentId            Identifier of the content associated with the assessment.
+     * @param versionKey           Version key of the assessment.
+     * @return SBApiResponse containing the assessment data.
+     */
+    SBApiResponse readAssessment(String assessmentIdentifier, String token, boolean edit, String contentId, String versionKey);
 }

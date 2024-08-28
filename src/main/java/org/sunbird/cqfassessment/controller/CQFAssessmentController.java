@@ -1,5 +1,6 @@
 package org.sunbird.cqfassessment.controller;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,9 @@ import org.sunbird.cqfassessment.service.CQFAssessmentService;
 import javax.validation.Valid;
 import java.util.Map;
 
+/**
+ * @author mahesh.vakkund
+ */
 @RestController
 @RequestMapping("/v1/cqfassessment")
 public class CQFAssessmentController {
@@ -45,5 +49,16 @@ public class CQFAssessmentController {
     public ResponseEntity<SBApiResponse> listCQFAssessments(@RequestHeader(Constants.X_AUTH_TOKEN) String authToken) {
         SBApiResponse assessments = cqfAssessmentService.listCQFAssessments(authToken);
         return ResponseEntity.ok(assessments);
+    }
+
+    @GetMapping("/assessment/read/{assessmentIdentifier}/{contentId}/{versionKey}")
+    public ResponseEntity<SBApiResponse> readAssessment(
+            @PathVariable("assessmentIdentifier") String assessmentIdentifier,
+            @PathVariable("contentId") String contentId,
+            @PathVariable("versionKey") String versionKey,
+            @RequestHeader(Constants.X_AUTH_TOKEN) String token, @RequestParam(name = "editMode", required = false) String editMode) {
+        boolean edit = !StringUtils.isEmpty(editMode) && Boolean.parseBoolean(editMode);
+        SBApiResponse readResponse = cqfAssessmentService.readAssessment(assessmentIdentifier, token, edit, contentId, versionKey);
+        return new ResponseEntity<>(readResponse, readResponse.getResponseCode());
     }
 }
