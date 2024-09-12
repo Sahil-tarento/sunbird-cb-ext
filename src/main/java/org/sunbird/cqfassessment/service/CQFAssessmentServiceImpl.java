@@ -749,33 +749,20 @@ public class CQFAssessmentServiceImpl implements CQFAssessmentService {
         if (assessmentStartTime == null) {
             return Constants.READ_ASSESSMENT_START_TIME_FAILED;
         }
-        // Calculate the expected duration and submission time
-        int expectedDuration = (Integer) cqfAssessmentModel.getAssessmentHierarchy().get(Constants.EXPECTED_DURATION);
-        Timestamp later = calculateAssessmentSubmitTime(expectedDuration,
-                new Timestamp(assessmentStartTime.getTime()),
-                Integer.parseInt(serverProperties.getUserAssessmentSubmissionDuration()));
-        Timestamp submissionTime = new Timestamp(new Date().getTime());
-        // Check if the submission time is before the expected duration
-        int time = submissionTime.compareTo(later);
-        if (time <= 0) {
-            // Validate the section details
-            List<String> desiredKeys = Lists.newArrayList(Constants.IDENTIFIER);
-            List<Object> hierarchySectionIds = cqfAssessmentModel.getHierarchySectionList().stream()
-                    .flatMap(x -> desiredKeys.stream().filter(x::containsKey).map(x::get)).collect(toList());
-            List<Object> submitSectionIds = cqfAssessmentModel.getSectionListFromSubmitRequest().stream()
-                    .flatMap(x -> desiredKeys.stream().filter(x::containsKey).map(x::get)).collect(toList());
-            if (!new HashSet<>(hierarchySectionIds).containsAll(submitSectionIds)) {
-                return Constants.WRONG_SECTION_DETAILS;
-            } else {
-                // Validate the question IDs
-                String areQuestionIdsSame = validateIfQuestionIdsAreSame(
-                        cqfAssessmentModel.getSectionListFromSubmitRequest(), desiredKeys, cqfAssessmentModel.getExistingAssessmentData());
-                if (!areQuestionIdsSame.isEmpty())
-                    return areQuestionIdsSame;
-            }
+        // Validate the section details
+        List<String> desiredKeys = Lists.newArrayList(Constants.IDENTIFIER);
+        List<Object> hierarchySectionIds = cqfAssessmentModel.getHierarchySectionList().stream()
+                .flatMap(x -> desiredKeys.stream().filter(x::containsKey).map(x::get)).collect(toList());
+        List<Object> submitSectionIds = cqfAssessmentModel.getSectionListFromSubmitRequest().stream()
+                .flatMap(x -> desiredKeys.stream().filter(x::containsKey).map(x::get)).collect(toList());
+        if (!new HashSet<>(hierarchySectionIds).containsAll(submitSectionIds)) {
+            return Constants.WRONG_SECTION_DETAILS;
         } else {
-            // Return an error if the submission time has expired
-            return Constants.ASSESSMENT_SUBMIT_EXPIRED;
+            // Validate the question IDs
+            String areQuestionIdsSame = validateIfQuestionIdsAreSame(
+                    cqfAssessmentModel.getSectionListFromSubmitRequest(), desiredKeys, cqfAssessmentModel.getExistingAssessmentData());
+            if (!areQuestionIdsSame.isEmpty())
+                return areQuestionIdsSame;
         }
         return "";
     }
