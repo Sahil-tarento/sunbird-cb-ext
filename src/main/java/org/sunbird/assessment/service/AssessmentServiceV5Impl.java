@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.sunbird.assessment.repo.AssessmentRepository;
+import org.sunbird.cassandra.utils.CassandraOperation;
 import org.sunbird.common.model.SBApiResponse;
 import org.sunbird.common.service.OutboundRequestHandlerServiceImpl;
 import org.sunbird.common.util.AccessTokenValidator;
@@ -55,6 +56,9 @@ public class AssessmentServiceV5Impl implements AssessmentServiceV5 {
 
     @Autowired
     AccessTokenValidator accessTokenValidator;
+
+    @Autowired
+    CassandraOperation cassandraOperation;
 
     @Override
     public SBApiResponse retakeAssessment(String assessmentIdentifier, String token,Boolean editMode) {
@@ -1195,6 +1199,31 @@ public class AssessmentServiceV5Impl implements AssessmentServiceV5 {
             if (MapUtils.isEmpty(publishResponse) || !publishResponse.get(Constants.RESPONSE_CODE).equals(Constants.OK)) {
                 logger.info(Constants.FAILED_TO_PUBLISH);
                 updateErrorDetails(response, Constants.PUBLISH_QUESTION_SET_FAILED,
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+                return response;
+            }
+            Map<String, Object> properyMap = new HashMap<>();
+            properyMap.put(Constants.USERID, userId);
+            List<String> fields = new ArrayList<>();
+            fields.add(Constants.ROOT_ORG_ID);
+            List<Map<String, Object>> cassandraResponse = cassandraOperation.getRecordsByPropertiesWithoutFiltering(Constants.KEYSPACE_SUNBIRD,
+                    Constants.TABLE_USER, properyMap, fields);
+            Map<String, Object> orgMap = cassandraResponse.get(0);
+            String rootOrgId = (String) orgMap.get(Constants.ROOT_ORG_ID);
+            Map<String, Object> updateRequest = new HashMap<>();
+            Map<String, Object> request = new HashMap<>();
+            Map<String, String> headerValues = new HashMap<>();
+            headerValues.put(Constants.X_AUTH_TOKEN, token);
+            request.put(Constants.ORGANIZATION_ID, rootOrgId);
+            request.put(Constants.CQF_ID, assessmentIdentifier);
+            updateRequest.put(Constants.REQUEST, request);
+            StringBuilder url = new StringBuilder(serverProperties.getSbUrl());
+            url.append(serverProperties.getUpdateOrgPath());
+            Object updateOrgResponse = outboundRequestHandlerService.fetchResultUsingPatch(
+                    String.valueOf(url), updateRequest, headerValues);
+            Map<String, Object> data = new ObjectMapper().convertValue(updateOrgResponse, Map.class);
+            if (MapUtils.isEmpty(data) || !data.get(Constants.RESPONSE_CODE).equals(Constants.OK)) {
+                updateErrorDetails(response, Constants.UPDATE_ORG_WITH_CQF_ID_FAILED,
                         HttpStatus.INTERNAL_SERVER_ERROR);
                 return response;
             }

@@ -813,6 +813,9 @@ public class CbExtServerProperties {
 	@Value("${spv.full.report.file.name}")
 	private String spvFullReportFileName;
 
+	@Value("${sb.update.org.path}")
+	private String updateOrgPath;
+
 	public boolean qListFromCacheEnabled() {
 		return qListFromCacheEnabled;
 	}
@@ -2845,4 +2848,8 @@ public class CbExtServerProperties {
 	public void setSpvFullReportFileName(String spvFullReportFileName) {
 		this.spvFullReportFileName = spvFullReportFileName;
 	}
+
+	public String getUpdateOrgPath() { return updateOrgPath; }
+
+	public void setUpdateOrgPath(String updateOrgPath) { this.updateOrgPath = updateOrgPath; }
 }
