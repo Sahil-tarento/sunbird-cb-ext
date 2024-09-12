@@ -768,6 +768,36 @@ public class CbExtServerProperties {
 	@Value("${sb.composite.v4.search}")
 	private String sbCompositeV4Search;
 
+	@Value("${assessment.questionset.hierarchy}")
+	private String questionSetHierarchy;
+
+	@Value("${assessment.questionset.create}")
+	private String questionSetCreate;
+
+	@Value("${assessment.questionset.read}")
+	private String questionSetRead;
+
+	@Value("${assessment.questionset.hierarchy.update}")
+	private String questionSetHierarchyUpdate;
+
+	@Value("${assessment.questionset.hierarchy.index}")
+	private String questionSetHierarchyIndex;
+
+	@Value("${cios.cloud.container.name}")
+	private String ciosCloudContainerName;
+
+	@Value("${cios.cloud.folder.name}")
+	private String ciosCloudFolderName;
+
+	@Value("${cios.cloud.icon.folder.name}")
+	private String ciosCloudIconFolderName;
+
+	@Value("${questionSet.publish}")
+	private String questionSetPublish;
+
+	public String getCiosCloudIconFolderName() {
+		return ciosCloudIconFolderName;
+	}
 	@Value("${kcm.framework.name}")
 	private String kcmFrameworkName;
 
@@ -2718,6 +2748,18 @@ public class CbExtServerProperties {
 		this.insightsMappingKey = insightsMappingKey;
 	}
 
+	public String getCiosCloudContainerName() {
+		return ciosCloudContainerName;
+	}
+
+	public String getCiosCloudFolderName() {
+		return ciosCloudFolderName;
+	}
+
+	public void setCiosCloudContainerName(String ciosCloudContainerName) {
+		this.ciosCloudContainerName = ciosCloudContainerName;
+	}
+
 	public String getSbSearchServiceHost() {
 		return sbSearchServiceHost;
 	}
@@ -2734,6 +2776,48 @@ public class CbExtServerProperties {
 		this.sbCompositeV4Search = sbCompositeV4Search;
 	}
 
+	public String getQuestionSetHierarchy() {
+		return questionSetHierarchy;
+	}
+
+	public void setQuestionSetHierarchy(String questionSetHierarchy) {
+		this.questionSetHierarchy = questionSetHierarchy;
+	}
+
+	public String getQuestionSetCreate() {
+		return questionSetCreate;
+	}
+
+	public void setQuestionSetCreate(String questionSetCreate) {
+		this.questionSetCreate = questionSetCreate;
+	}
+
+	public String getQuestionSetRead() {
+		return questionSetRead;
+	}
+
+	public void setQuestionSetRead(String questionSetRead) {
+		this.questionSetRead = questionSetRead;
+	}
+
+	public String getQuestionSetHierarchyUpdate() {
+		return questionSetHierarchyUpdate;
+	}
+
+	public void setQuestionSetHierarchyUpdate(String questionSetHierarchyUpdate) {
+		this.questionSetHierarchyUpdate = questionSetHierarchyUpdate;
+	}
+
+	public String getQuestionSetHierarchyIndex() {
+		return questionSetHierarchyIndex;
+	}
+
+	public void setQuestionSetHierarchyIndex(String questionSetHierarchyIndex) {
+		this.questionSetHierarchyIndex = questionSetHierarchyIndex;
+	}
+	public String getQuestionSetPublish() { return questionSetPublish; }
+
+	public void setQuestionSetPublish(String questionSetPublish) { this.questionSetPublish = questionSetPublish; }
 	public String getKcmFrameworkName() {
 		return kcmFrameworkName;
 	}
