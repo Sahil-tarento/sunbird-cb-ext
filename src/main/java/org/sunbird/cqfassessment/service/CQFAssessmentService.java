@@ -98,4 +98,6 @@ public interface CQFAssessmentService {
      * @return the API response containing the updated question set
      */
     SBApiResponse updateCQFQuestionSet(String authToken, @Valid Map<String, Object> requestBody);
+
+    SBApiResponse readQuestionList(@Valid Map<String, Object> requestBody, String authUserToken, boolean edit);
 }
