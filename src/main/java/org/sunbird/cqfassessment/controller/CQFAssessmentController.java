@@ -93,4 +93,13 @@ public class CQFAssessmentController {
         SBApiResponse createdAssessment = cqfAssessmentService.updateCQFQuestionSet(authToken, requestBody);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAssessment);
     }
+
+
+    @PostMapping("/question/list")
+    public ResponseEntity<SBApiResponse> readQuestionList(@Valid @RequestBody Map<String, Object> requestBody,
+                                                            @RequestHeader("x-authenticated-user-token") String authUserToken,@RequestParam(name = "editMode" ,required = false) String editMode) {
+        boolean edit = !StringUtils.isEmpty(editMode) && Boolean.parseBoolean(editMode);
+        SBApiResponse response = cqfAssessmentService.readQuestionList(requestBody, authUserToken,edit);
+        return new ResponseEntity<>(response, response.getResponseCode());
+    }
 }
