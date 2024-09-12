@@ -768,6 +768,33 @@ public class CbExtServerProperties {
 	@Value("${sb.composite.v4.search}")
 	private String sbCompositeV4Search;
 
+	@Value("${master.competency.framework.name}")
+	private String masterCompetencyFrameworkName;
+
+	@Value("${bulk.upload.competency.your.workspace.name}")
+	private String bulkUploadCompetencyYourWorkSpaceName;
+
+	@Value("${bulk.upload.competency.reference.workspace.name}")
+	private String bulkUploadCompetencyReferenceWorkSpaceName;
+
+	@Value("${bulk.upload.master.designation.workspace.name}")
+	private String bulkUploadMasterDesignationWorkSpaceName;
+
+	@Value("${bulk.upload.competency.designation.file.name}")
+	private String bulkUploadCompetencyDesignationFileName;
+
+	@Value("${competency.designation.bulk.upload.container.name}")
+	private String competencyDesignationBulkUploadContainerName;
+
+	@Value("${kafka.topics.competency.designation.bulk.upload.event}")
+	private String competencyDesignationBulkUploadTopic;
+
+	@Value("${km.framework.term.update.path}")
+	private String kmFrameworkTermUpdatePath;
+
+	@Value("${km.framework.publish.path}")
+	private String kmFrameworkPublishPath;
+
 	public boolean qListFromCacheEnabled() {
 		return qListFromCacheEnabled;
 	}
@@ -2717,5 +2744,77 @@ public class CbExtServerProperties {
 
 	public void setSbCompositeV4Search(String sbCompositeV4Search) {
 		this.sbCompositeV4Search = sbCompositeV4Search;
+	}
+
+	public String getMasterCompetencyFrameworkName() {
+		return masterCompetencyFrameworkName;
+	}
+
+	public void setMasterCompetencyFrameworkName(String masterCompetencyFrameworkName) {
+		this.masterCompetencyFrameworkName = masterCompetencyFrameworkName;
+	}
+
+	public String getBulkUploadCompetencyYourWorkSpaceName() {
+		return bulkUploadCompetencyYourWorkSpaceName;
+	}
+
+	public void setBulkUploadCompetencyYourWorkSpaceName(String bulkUploadCompetencyYourWorkSpaceName) {
+		this.bulkUploadCompetencyYourWorkSpaceName = bulkUploadCompetencyYourWorkSpaceName;
+	}
+
+	public String getBulkUploadCompetencyReferenceWorkSpaceName() {
+		return bulkUploadCompetencyReferenceWorkSpaceName;
+	}
+
+	public void setBulkUploadCompetencyReferenceWorkSpaceName(String bulkUploadCompetencyReferenceWorkSpaceName) {
+		this.bulkUploadCompetencyReferenceWorkSpaceName = bulkUploadCompetencyReferenceWorkSpaceName;
+	}
+
+	public String getBulkUploadMasterDesignationWorkSpaceName() {
+		return bulkUploadMasterDesignationWorkSpaceName;
+	}
+
+	public void setBulkUploadMasterDesignationWorkSpaceName(String bulkUploadMasterDesignationWorkSpaceName) {
+		this.bulkUploadMasterDesignationWorkSpaceName = bulkUploadMasterDesignationWorkSpaceName;
+	}
+
+	public String getBulkUploadCompetencyDesignationFileName() {
+		return bulkUploadCompetencyDesignationFileName;
+	}
+
+	public void setBulkUploadCompetencyDesignationFileName(String bulkUploadCompetencyDesignationFileName) {
+		this.bulkUploadCompetencyDesignationFileName = bulkUploadCompetencyDesignationFileName;
+	}
+
+	public String getCompetencyDesignationBulkUploadContainerName() {
+		return competencyDesignationBulkUploadContainerName;
+	}
+
+	public void setCompetencyDesignationBulkUploadContainerName(String competencyDesignationBulkUploadContainerName) {
+		this.competencyDesignationBulkUploadContainerName = competencyDesignationBulkUploadContainerName;
+	}
+
+	public String getCompetencyDesignationBulkUploadTopic() {
+		return competencyDesignationBulkUploadTopic;
+	}
+
+	public void setCompetencyDesignationBulkUploadTopic(String competencyDesignationBulkUploadTopic) {
+		this.competencyDesignationBulkUploadTopic = competencyDesignationBulkUploadTopic;
+	}
+
+	public String getKmFrameworkTermUpdatePath() {
+		return kmFrameworkTermUpdatePath;
+	}
+
+	public void setKmFrameworkTermUpdatePath(String kmFrameworkTermUpdatePath) {
+		this.kmFrameworkTermUpdatePath = kmFrameworkTermUpdatePath;
+	}
+
+	public String getKmFrameworkPublishPath() {
+		return kmFrameworkPublishPath;
+	}
+
+	public void setKmFrameworkPublishPath(String kmFrameworkPublishPath) {
+		this.kmFrameworkPublishPath = kmFrameworkPublishPath;
 	}
 }

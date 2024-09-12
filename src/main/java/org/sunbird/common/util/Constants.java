@@ -1139,6 +1139,19 @@ public class Constants {
 	public static final String CQF_ASSESSMENT_TRACKING = "cqf_assessment_tracking";
 	public static final String CQF_ASSESSMENT_DATA = "cqfAssessmentData";
 	public static final String TABLE_CQF_ASSESSMENT_DATA = "cqf_assessment_data";
+	public static final String FRAMEWORK = "framework";
+	public static final String CATEGORIES = "categories";
+	public static final String COMPETENCY_AREA_LOWERCASE = "competencyarea";
+	public static final String THEME = "theme";
+	public static final String API_COMPETENCY_DESIGNATION_EVENT_BULK_UPLOAD = "api.competency.designation.bulk.upload";
+	public static final String TABLE_COMPETENCY_DESIGNATION_BULK_UPLOAD = "competency_designation_bulk_upload";
+	public static final String FRAMEWORK_ID = "frameworkId";
+	public static final String ASSOCIATIONS = "associations";
+	public static final String COMPETENCY_AREA_NAME = "competencyAreaName";
+	public static final String COMPETENCY_THEME_NAME = "competencyThemeName";
+	public static final String COMPETENCY_SUB_THEME_NAME = "competencySubThemeName";
+	public static final String TIMESTAMP = "timeStamp";
+	public static final String SUBTHEME = "subtheme";
 
 	private Constants() {
 		throw new IllegalStateException("Utility class");
