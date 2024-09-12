@@ -1178,6 +1178,8 @@ public class Constants {
 	public static final String TOTAL_MARKS_FOR_SECTION = "totalMarksForSection";
 	public static final String ACHIEVED_MARKS_FOR_SECTION = "achievedMarksForSection";
 	public static final String OVERALL_ASSESSMENT_SCORE = "overalAssessmentScore";
+	public static final String CQF_ID = "cqfId";
+	public static final String UPDATE_ORG_WITH_CQF_ID_FAILED = "update organisation with cqfId failed";
 
 	private Constants() {
 		throw new IllegalStateException("Utility class");
