@@ -78,11 +78,10 @@ public interface AssessmentRepository {
 	 * @param submitAssessmentRequest     The request object containing assessment data to be updated.
 	 * @param submitAssessmentResponse    The response object containing the result of the assessment submission.
 	 * @param status                      The status of the assessment submission (e.g. "passed", "failed", etc.).
-	 * @param startTime                   The start time of the assessment submission.
 	 * @param saveSubmitAssessmentRequest A map of request data to be saved along with the assessment submission.
 	 */
 	void updateCQFAssesmentDataToDB(Map<String, Object> paramsMap,
 									Map<String, Object> submitAssessmentRequest, Map<String, Object> submitAssessmentResponse, String status,
-									Date startTime, Map<String, Object> saveSubmitAssessmentRequest);
+									Map<String, Object> saveSubmitAssessmentRequest);
 
 }

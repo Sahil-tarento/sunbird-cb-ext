@@ -693,17 +693,13 @@ public class CQFAssessmentServiceImpl implements CQFAssessmentService {
     private void writeDataToDatabase(Map<String, Object> submitRequest, String userId,
                                      Map<String, Object> questionSetFromAssessment, Map<String, Object> result) {
         try {
-            if (questionSetFromAssessment.get(Constants.START_TIME) != null) {
-                Long existingAssessmentStartTime = (Long) questionSetFromAssessment.get(Constants.START_TIME);
-                Timestamp startTime = new Timestamp(existingAssessmentStartTime);
-                Map<String, Object> paramsMap = new HashMap<>();
-                paramsMap.put(Constants.USER_ID, userId);
-                paramsMap.put(Constants.ASSESSMENT_IDENTIFIER, submitRequest.get(Constants.IDENTIFIER));
-                paramsMap.put(Constants.CONTENT_ID_KEY, submitRequest.get(Constants.CONTENT_ID_KEY));
-                paramsMap.put(Constants.VERSION_KEY, submitRequest.get(Constants.VERSION_KEY));
-                assessmentRepository.updateCQFAssesmentDataToDB(paramsMap, submitRequest, result, Constants.SUBMITTED,
-                        startTime, null);
-            }
+            Map<String, Object> paramsMap = new HashMap<>();
+            paramsMap.put(Constants.USER_ID, userId);
+            paramsMap.put(Constants.ASSESSMENT_IDENTIFIER, submitRequest.get(Constants.IDENTIFIER));
+            paramsMap.put(Constants.CONTENT_ID_KEY, submitRequest.get(Constants.CONTENT_ID_KEY));
+            paramsMap.put(Constants.VERSION_KEY, submitRequest.get(Constants.VERSION_KEY));
+            assessmentRepository.updateCQFAssesmentDataToDB(paramsMap, submitRequest, result, Constants.SUBMITTED,
+                     null);
         } catch (Exception e) {
             logger.error("Failed to write data for assessment submit response. Exception: ", e);
         }

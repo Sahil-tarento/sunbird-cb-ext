@@ -218,19 +218,17 @@ public class AssessmentRepositoryImpl implements AssessmentRepository {
 	 * @param submitAssessmentRequest     The request object containing assessment data to be updated.
 	 * @param submitAssessmentResponse    The response object containing the result of the assessment submission.
 	 * @param status                      The status of the assessment submission (e.g. "passed", "failed", etc.).
-	 * @param startTime                   The start time of the assessment submission.
 	 * @param saveSubmitAssessmentRequest A map of request data to be saved along with the assessment submission.
 	 */
 	@Override
 	public void updateCQFAssesmentDataToDB(Map<String, Object> paramsMap,
 										   Map<String, Object> submitAssessmentRequest, Map<String, Object> submitAssessmentResponse, String status,
-										   Date startTime, Map<String, Object> saveSubmitAssessmentRequest) {
+										   Map<String, Object> saveSubmitAssessmentRequest) {
 		Map<String, Object> compositeKeys = new HashMap<>();
 		compositeKeys.put(Constants.USER_ID, paramsMap.get(Constants.USER_ID));
 		compositeKeys.put(Constants.ASSESSMENT_ID_KEY, paramsMap.get(Constants.ASSESSMENT_IDENTIFIER));
 		compositeKeys.put(Constants.CONTENT_ID_KEY, paramsMap.get(Constants.CONTENT_ID_KEY));
 		compositeKeys.put(Constants.VERSION_KEY, paramsMap.get(Constants.VERSION_KEY));
-		compositeKeys.put(Constants.START_TIME, startTime);
 		Map<String, Object> fieldsToBeUpdated = new HashMap<>();
 		if (MapUtils.isNotEmpty(submitAssessmentRequest)) {
 			fieldsToBeUpdated.put("submitassessmentrequest", new Gson().toJson(submitAssessmentRequest));
