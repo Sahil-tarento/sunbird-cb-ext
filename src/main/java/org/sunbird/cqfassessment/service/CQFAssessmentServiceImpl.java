@@ -7,7 +7,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.RestStatus;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,15 +160,29 @@ public class CQFAssessmentServiceImpl implements CQFAssessmentService {
     @Override
     public SBApiResponse listCQFAssessments(String authToken) {
         logger.info("CQFAssessmentServiceImpl::listCQFAssessments... Started");
+        List<Map<String, Object>> resultArray = new ArrayList<>();
+        Map<String, Object> result;
+        Map<String, Object> resultResp = new HashMap<>();
         SBApiResponse response = ProjectUtil.createDefaultResponse(Constants.CQF_API_LIST_ASSESSMENT);
         String userId = accessTokenValidator.fetchUserIdFromAccessToken(authToken);
         if (StringUtils.isBlank(userId)) {
             updateErrorDetails(response, HttpStatus.INTERNAL_SERVER_ERROR);
             return response;
         }
-        Map<String, Object> propertyMap = new HashMap<>();
-        List<Map<String, Object>> cqfAssessmentDataList = cassandraOperation.getRecordsByProperties(Constants.KEYSPACE_SUNBIRD, Constants.CQF_ASSESSMENT_TRACKING, propertyMap, new ArrayList<>());
-        response.getResult().put(Constants.CQF_ASSESSMENT_DATA, cqfAssessmentDataList);
+        SearchResponse searchResponse;
+        try {
+            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+            searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+            searchResponse = indexerService.getEsResult(serverProperties.getQuestionSetHierarchyIndex(), serverConfig.getEsProfileIndexType(), searchSourceBuilder, true);
+            for (SearchHit hit : searchResponse.getHits()) {
+                result = hit.getSourceAsMap();
+                resultArray.add(result);
+            }
+        } catch (IOException e) {
+            logger.error(String.format("Failed to process the cqfquestionList search. %s", e.getMessage()));
+        }
+        resultResp.put(Constants.CQF_ASSESSMENT_DATA, resultArray);
+        response.getResult().putAll(resultResp);
         return response;
     }
 
