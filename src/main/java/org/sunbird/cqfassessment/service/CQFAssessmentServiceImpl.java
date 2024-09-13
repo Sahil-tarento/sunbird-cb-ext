@@ -761,12 +761,6 @@ public class CQFAssessmentServiceImpl implements CQFAssessmentService {
             // Add the existing assessment data to the CQF assessment model
             cqfAssessmentModel.getExistingAssessmentData().putAll(existingDataList.get(0));
         }
-        // Get the assessment start time
-        Date assessmentStartTime = (Date) cqfAssessmentModel.getExistingAssessmentData().get(Constants.START_TIME);
-        // Check if the assessment start time is null
-        if (assessmentStartTime == null) {
-            return Constants.READ_ASSESSMENT_START_TIME_FAILED;
-        }
         // Validate the section details
         List<String> desiredKeys = Lists.newArrayList(Constants.IDENTIFIER);
         List<Object> hierarchySectionIds = cqfAssessmentModel.getHierarchySectionList().stream()
