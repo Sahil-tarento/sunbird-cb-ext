@@ -1153,6 +1153,7 @@ public class Constants {
 	public static final String SUBTHEME = "subtheme";
 	public static final String X_CHANNEL_ID = "X-Channel-Id";
 	public static final String TABLE_COMPETENCY_DESIGNATION_MAPPING_BULK_UPLOAD = "designation_competency_mapping_bulk_upload";
+	public static final String API_COMPETENCY_DESIGNATION_BULK_UPLOAD_STATUS = "api.competency.designation.bulk.upload.status";
 
 	private Constants() {
 		throw new IllegalStateException("Utility class");

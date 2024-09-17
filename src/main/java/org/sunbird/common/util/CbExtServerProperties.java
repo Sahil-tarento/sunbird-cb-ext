@@ -795,6 +795,9 @@ public class CbExtServerProperties {
 	@Value("${km.framework.publish.path}")
 	private String kmFrameworkPublishPath;
 
+	@Value("${designation.competency.bulk.upload.update.threshold.value}")
+	private int bulkUploadThresholdValue;
+
 	public boolean qListFromCacheEnabled() {
 		return qListFromCacheEnabled;
 	}
@@ -2816,5 +2819,13 @@ public class CbExtServerProperties {
 
 	public void setKmFrameworkPublishPath(String kmFrameworkPublishPath) {
 		this.kmFrameworkPublishPath = kmFrameworkPublishPath;
+	}
+
+	public int getBulkUploadThresholdValue() {
+		return bulkUploadThresholdValue;
+	}
+
+	public void setBulkUploadThresholdValue(int bulkUploadThresholdValue) {
+		this.bulkUploadThresholdValue = bulkUploadThresholdValue;
 	}
 }

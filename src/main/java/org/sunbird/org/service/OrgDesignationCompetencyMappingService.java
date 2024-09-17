@@ -11,4 +11,8 @@ public interface OrgDesignationCompetencyMappingService {
     SBApiResponse bulkUploadCompetencyDesignationMapping(MultipartFile file, String rootOrgId, String userAuthToken, String frameworkId);
 
     void initiateCompetencyDesignationBulkUploadProcess(String value);
+
+    ResponseEntity<?> downloadFile(String fileName, String rootOrgId, String userAuthToken);
+
+    SBApiResponse getBulkUploadDetailsForCompetencyDesignationMapping(String orgId, String rootOrgId, String userAuthToken);
 }
