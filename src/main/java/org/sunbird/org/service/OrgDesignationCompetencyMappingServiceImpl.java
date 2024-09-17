@@ -683,6 +683,19 @@ public class OrgDesignationCompetencyMappingServiceImpl implements OrgDesignatio
                     totalNumberOfRecordInSheet++;
                 }
                 rowIterator = sheet.iterator();
+                if (rowIterator.hasNext()) {
+                    Row firstRow = rowIterator.next();
+                    Cell statusCell = firstRow.getCell(4);
+                    Cell errorDetails = firstRow.getCell(5);
+                    if (statusCell == null) {
+                        statusCell = firstRow.createCell(4);
+                    }
+                    if (errorDetails == null) {
+                        errorDetails = firstRow.createCell(5);
+                    }
+                    statusCell.setCellValue("Status");
+                    errorDetails.setCellValue("Error Details");
+                }
                 while (rowIterator.hasNext()) {
                     List<Map<String, Object>> getAllDesignationForOrg = populateDataFromFrameworkTerm(frameworkId);
                     Map<String, Object> designationFrameworkObject = null;
