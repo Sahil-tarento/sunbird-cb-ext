@@ -567,7 +567,7 @@ public class OrgDesignationCompetencyMappingServiceImpl implements OrgDesignatio
                 logger.error("User is not authorized to download the file for other org");
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
-            storageService.downloadFile(fileName);
+            storageService.downloadFile(fileName, serverProperties.getCompetencyDesignationBulkUploadContainerName());
             Path tmpPath = Paths.get(Constants.LOCAL_BASE_PATH + fileName);
             ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(tmpPath));
             HttpHeaders headers = new HttpHeaders();
@@ -682,6 +682,7 @@ public class OrgDesignationCompetencyMappingServiceImpl implements OrgDesignatio
                     if (allColumnsEmpty) continue;
                     totalNumberOfRecordInSheet++;
                 }
+                rowIterator = sheet.iterator();
                 while (rowIterator.hasNext()) {
                     List<Map<String, Object>> getAllDesignationForOrg = populateDataFromFrameworkTerm(frameworkId);
                     Map<String, Object> designationFrameworkObject = null;
