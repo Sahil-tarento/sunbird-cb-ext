@@ -1191,6 +1191,22 @@ public class Constants {
 	public static final String X_CHANNEL_ID = "X-Channel-Id";
 	public static final String TABLE_COMPETENCY_DESIGNATION_MAPPING_BULK_UPLOAD = "designation_competency_mapping_bulk_upload";
 	public static final String API_COMPETENCY_DESIGNATION_BULK_UPLOAD_STATUS = "api.competency.designation.bulk.upload.status";
+	public static final String PAGE_NUMBER = "pageNumber";
+	public static final String TABLE_ORG_DESIGNATION_MAPPING_BULK_UPLOAD = "org_designation_mapping_bulk_upload";
+	public static final String API_ORG_DESIGNATION_BULK_UPLOAD_STATUS = "api.org.designation.bulk.upload.status";
+	public static final String API_ORG_DESIGNATION_EVENT_BULK_UPLOAD = "api.org.designation.bulk.upload";
+	public static final String FILTER_CRITERIA_MAP = "filterCriteriaMap";
+	public static final String PAGE_SIZE = "pageSize";
+	public static final String REQUEST_FIELDS = "requestedFields";
+	public static final String REF_TYPE = "refType";
+	public static final String IMPORT_BY_ID = "importedById";
+	public static final String IMPORT_BY_NAME = "importedByName";
+	public static final String IMPORTED_ON = "importedOn";
+	public static final String PREVIOUS_CATEGORY_CODE = "previousCategoryCode";
+	public static final String PREVIOUS_TERM_CODE = "previousTermCode";
+	public static final String DESIGNATION_MASTER_DATA = "designation_master_data";
+	public static final String COMPETENCY_MASTER_DATA = "competency_master_data";
+
 
 	private Constants() {
 		throw new IllegalStateException("Utility class");
