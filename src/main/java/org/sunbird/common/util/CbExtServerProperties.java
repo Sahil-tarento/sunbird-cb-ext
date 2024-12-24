@@ -975,6 +975,21 @@ public class CbExtServerProperties {
 	@Value("${map.id.counter.enabled}")
 	private String mapIdCounterEnabled;
 
+	@Value("${looker.secret.key}")
+	private String lookerSecretKey;
+
+	@Value("${looker.host}")
+	private String lookerHost;
+
+	@Value("${looker.user.model}")
+	private String lookerUserModel;
+
+	@Value("${looker.user.dashboard.permission}")
+	private String lookerUserDashboardPermission;
+
+	@Value("${looker.user.group.ids}")
+	private String lookerUserGroupIDs;
+
 
 	public String getCiosCloudIconFolderName() {
 		return ciosCloudIconFolderName;
@@ -3372,5 +3387,45 @@ public class CbExtServerProperties {
 
 	public void setMapIdCounterEnabled(String mapIdCounterEnabled) {
 		this.mapIdCounterEnabled = mapIdCounterEnabled;
+	}
+
+	public String getLookerHost() {
+		return lookerHost;
+	}
+
+	public void setLookerHost(String lookerHost) {
+		this.lookerHost = lookerHost;
+	}
+
+	public String getLookerSecretKey() {
+		return lookerSecretKey;
+	}
+
+	public void setLookerSecretKey(String lookerSecretKey) {
+		this.lookerSecretKey = lookerSecretKey;
+	}
+
+	public List<String> getLookerUserDashboardPermission() {
+		return Arrays.asList(lookerUserDashboardPermission.split(","));
+	}
+
+	public void setLookerUserDashboardPermission(String lookerUserDashboardPermission) {
+		this.lookerUserDashboardPermission = lookerUserDashboardPermission;
+	}
+
+	public List<String> getLookerUserModel() {
+		return Arrays.asList(lookerUserModel.split(","));
+	}
+
+	public void setLookerUserModel(String lookerUserModel) {
+		this.lookerUserModel = lookerUserModel;
+	}
+
+	public List<String> getLookerUserGroupIDs() {
+		return Arrays.asList(lookerUserGroupIDs.split(","));
+	}
+
+	public void setLookerUserGroupIDs(String lookerUserGroupIDs) {
+		this.lookerUserGroupIDs = lookerUserGroupIDs;
 	}
 }

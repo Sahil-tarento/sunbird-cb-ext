@@ -1316,6 +1316,7 @@ public class Constants {
 	public static final String ENABLED = "enabled";
 
 	public static final String INVALID_GROUP_MESSAGE = "Invalid Group : Group can be only among one of these ";
+	public static final String LOOKER_SIGNED_URL = "api.looker.signed.url";
 
 	private Constants() {
 		throw new IllegalStateException("Utility class");
